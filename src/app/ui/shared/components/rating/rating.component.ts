@@ -18,6 +18,7 @@ export class RatingComponent implements OnInit, ControlValueAccessor {
 
   @Input()
   public readonly: boolean = false
+  public isDisabled: boolean = false
 
   constructor() {
   }
@@ -40,6 +41,7 @@ export class RatingComponent implements OnInit, ControlValueAccessor {
   }
 
   public setDisabledState(isDisabled: boolean): void {
+    this.isDisabled = isDisabled
   }
 
   public writeValue(ratingCount: number) {
@@ -53,17 +55,7 @@ export class RatingComponent implements OnInit, ControlValueAccessor {
   }
 
   public onClickStar(index: number): void {
-    const newStars: boolean[] = new Array(this.stars.length).fill(false)
-
-    for (let i = 0; i < newStars.length; i++) {
-      newStars[ i ] = true
-
-      if (i === index) {
-        break
-      }
-    }
-
-    this.stars = newStars
+    this.writeValue(index + 1)
     this.updateFormControlTouchState()
     this.updateFormControlValue(this.stars.filter(isSelected => isSelected).length)
   }
