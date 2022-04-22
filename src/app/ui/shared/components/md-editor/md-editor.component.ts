@@ -1,0 +1,54 @@
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { TabButton } from 'src/app/lib/types';
+
+@Component({
+  selector: 'mn-md-editor',
+  templateUrl: './md-editor.component.html',
+  styleUrls: ['./md-editor.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MdEditorComponent),
+      multi: true
+    }
+  ]
+})
+export class MdEditorComponent implements OnInit, ControlValueAccessor {
+  public selectedTabName: TabButton = "MD"
+  public editorValue: string = ''
+  public isDisabled: boolean = false
+
+  constructor() {
+  }
+
+  public writeValue(markdown: string): void {
+    this.editorValue = markdown
+  }
+
+  public registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn
+  }
+
+  public registerOnTouched(fn: () => void): void {
+    this.onTouch = fn
+  }
+  
+  public setDisabledState(isDisabled: boolean): void {
+    this.isDisabled = isDisabled
+  }
+
+  public onChange(markdownValue: string): void {
+  }
+
+  public onTouch(): void {
+  }
+
+  public ngOnInit(): void {
+  }
+
+  public onClickTabButton(tabName: TabButton) {
+    this.selectedTabName = tabName
+  }
+
+}

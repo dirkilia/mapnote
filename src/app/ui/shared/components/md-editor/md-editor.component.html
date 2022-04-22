@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <div class="tabs-container">
+      <button class="button tab-button"
+              [class.is-active]="selectedTabName === 'MD'"
+              (click)="onClickTabButton('MD')"
+              [disabled]="isDisabled">Контент</button>
+  
+      <button class="button tab-button"
+              [class.is-active]="selectedTabName === 'RES'"
+              (click)="onClickTabButton('RES')"
+              [disabled]="isDisabled">Результат</button>
+    </div>
+  
+    <textarea *ngIf="selectedTabName === 'MD'"
+              class="field-input input" id="description"
+              [(ngModel)]="editorValue"></textarea>
+  
+    <div *ngIf="selectedTabName === 'RES'"
+         class="result">
+        <markdown [data]="editorValue"></markdown>    
+    </div>
+  </div>
