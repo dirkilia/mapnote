@@ -21,6 +21,9 @@ export class ShellComponent implements OnInit {
     this.mapService.isReady.then((map) => {
       map.addEventListener("click", (event: LeafletMouseEvent) => {
         this.isShowAddButton = true
+        setTimeout(() => {
+          this.isShowAddButton = false
+        }, 3000);
         this.dialogService.isCurrentEditLatLng = event.latlng
       })
     })
