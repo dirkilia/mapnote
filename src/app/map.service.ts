@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core"
+import { Marker } from "leaflet"
 import { BehaviorSubject, filter, firstValueFrom } from "rxjs"
+import { Place } from "./domain"
 import { LeafletMap } from "./lib"
 
 @Injectable({
@@ -7,6 +9,7 @@ import { LeafletMap } from "./lib"
 })
 export class MapService {
   private map: BehaviorSubject<LeafletMap | null> = new BehaviorSubject(null)
+  public markers: Map<Place, Marker> = new Map()
 
   public isReady: Promise<LeafletMap> = firstValueFrom(
     this.map.pipe(
