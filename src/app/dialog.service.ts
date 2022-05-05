@@ -11,4 +11,12 @@ export class DialogService {
 
   constructor() {
   }
+
+  public openDialog(): void {
+    this.isShowCreateOrEditDialog = true
+  }
+
+  public closeDialog(): void {
+    this.isShowCreateOrEditDialog = false
+  }
 }
